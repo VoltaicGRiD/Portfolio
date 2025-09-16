@@ -3,6 +3,7 @@ title: "Why Dark Folk Resonates With Me"
 description: "How music shaped the way I think about mood, storytelling, and the spaces I create."
 pubDate: 2025-09-19
 tags: ["Music", "Dark Folk", "Creativity", "Storytelling"]
+heroImage: "../../assets/dark-folk.png"
 ---
 
 I spend a lot of time with headphones on, and more often than not I’m listening to dark folk. It really all started with *Pacific Drive*, a compelling first-person driving game set in the Olympic Peninsula, developed by **Ironwood Studios**. Alongside its stunning visuals, and a fascinating gameplay loop, it ships with a fantastic, *otherworldly* soundtrack. At first it was just a sound I liked: simple instruments, voices that felt raw instead of polished, a kind of heaviness that was comforting rather than draining. Over time, I realized it wasn’t just background noise. Paired with the anomalous environment, and the gritty-but-gorgeous aesthetic of the game, it was shaping the way I thought about atmosphere and storytelling. 

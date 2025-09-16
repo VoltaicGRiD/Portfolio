@@ -3,6 +3,7 @@ title: "Why Star Trek Inspires My Approach to Development"
 description: "How the optimistic vision of Star Trek influences my coding philosophy, worldbuilding, and creative projects."
 pubDate: 2025-06-29
 tags: ["Star Trek", "Development", "Philosophy", "TTRPG", "Creativity"]
+heroImage: "../../assets/star-trek-development.png"
 ---
 
 When I sit down to code, whether it’s a backend API in .NET, a Blender render of a shield, or tinkering with game mechanics, I usually end up thinking about *Star Trek*. Not just the phasers and warp drives (though those are fun), but the way the Federation is built on cooperation, curiosity, and the drive to make things better.  
