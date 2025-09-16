@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/SitePage.astro';
+---
+
+<Layout 
+  title="Consulting & Strategy Services" 
+  description="Hire me for consulting and strategy services.">
+  <style>
+    main { width: calc(100% - 2em); max-width: 1200px; margin: 0 auto; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 2em 1em; color: rgb(var(--gray-dark)); text-align: center; }
+    h1 { margin: 0 0 .5em; }
+    p { line-height: 1.6; }
+    .cta { margin-top: 1.25em; display: inline-flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block; padding: .7em 1.1em; border-radius: 10px;
+      background: #111827; color: #fff; text-decoration: none;
+    }
+    .btn.secondary {
+      background: #fff; color: #111827; border: 1px solid rgba(0,0,0,.1);
+    }
+  </style>
+  <div>
+
+    <p>
+    Scale smarter with cloud and DevOps consulting. I help organizations architect, secure, and optimize their infrastructure using Azure, Kubernetes, Terraform, and modern CI/CD pipelines. From cloud migrations to multi-cluster deployments, I deliver solutions that reduce costs, improve reliability, and accelerate development cycles. With experience across SaaS, enterprise, and startup environments, I provide actionable guidance and hands-on implementation to make sure your systems are ready for growth.    
+    </p>
+
+    <p class="warning">Before committing to any purchase, please contact me at <a href="mailto:dustin@dustinconlon.com">dustin@dustinconlon.com</a> and/or at <a href="tel:+17195516779">+1 (719) 551-6779</a>.</p>
+
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table pricing-table-id="prctbl_1S7aOoHbHu1ywpNLqKXUbzyR"
+    publishable-key="pk_live_51QPAK2HbHu1ywpNLSZsRxOY3X6Kpzvm4r2Q2q0LtemBO7bbSD49UmipvC5C7iZCaNpYphdzw8GbQmB4kPmKLdBkt00yK4vUvn2">
+    </stripe-pricing-table>
+  </div>
+</Layout>

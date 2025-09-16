@@ -11,7 +11,9 @@
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
+	--blue: 59, 130, 246;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+	--red: 220, 38, 38;
 	--box-shadow:
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
 		rgba(var(--gray), 33%);
@@ -152,4 +154,16 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+.warning {
+	margin-top: 1.5em;
+	color: rgb(var(--red));
+	font-weight: bold;
+}
+
+.info {
+	margin-top: 1.5em;
+	color: rgb(var(--blue));
+	font-weight: bold;
 }

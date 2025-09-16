@@ -1,0 +1,101 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Static seed data for now. (We can wire this to GitHub later.)
+const projects = [
+  {
+    name: 'Utopia FoundryVTT',
+    description: 'The Utopia TTRPG system for Foundry VTT.',
+    url: 'https://github.com/VoltaicGRiD/utopia-foundryvtt',
+    updated: 'May 20, 2025',
+  },
+  {
+    name: 'Utopia Things Editor',
+    description: 'Web app and lightweight markup parser for Utopia handouts and equipment cards.',
+    url: 'https://github.com/VoltaicGRiD/utopia-things-editor',
+    updated: 'September 7, 2025',
+  },
+  {
+    name: 'Utopia Skilltree Generator',
+    description: 'Generator for modular skill trees in the Utopia TTRPG.',
+    url: 'https://github.com/VoltaicGRiD/utopia-skilltree-generator',
+    updated: 'November 24, 2024',
+  },
+  {
+    name: 'ChatPlaysMC',
+    description: 'Experimental project that lets chat control a Minecraft instance in real-time.',
+    url: 'https://github.com/VoltaicGRiD/ChatPlaysMC',
+    updated: 'September 4, 2025',
+  },
+  {
+    name: 'Table Safety',
+    description: 'Streamlined TTRPG safety module for Foundry VTT with Pause, Hardstop, Fast Forward, and Hands.',
+    url: 'https://github.com/VoltaicGRiD/table-safety',
+    updated: 'July 31, 2025',
+  },
+  {
+    name: 'ESP32 PoE Board',
+    description: 'WIP power-over-Ethernet ESP32 board for freeing IP cameras from mandatory Ethernet runs.',
+    url: 'https://github.com/VoltaicGRiD/ESP32-PoE',
+    updated: 'September 30, 2024',
+  },
+  {
+    name: 'Neovim Dotfiles',
+    description: 'Personal Neovim config built on LazyVim.',
+    url: 'https://github.com/VoltaicGRiD/nvim-dotfiles',
+    updated: 'June 5, 2025',
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title="Projects" description="Selected public projects and experiments." />
+    <style>
+      main { width: calc(100% - 2em); max-width: 1100px; margin: 0 auto; }
+      .intro { max-width: 820px; margin: 0 auto; padding: 1.5em 1em; color: rgb(var(--gray-dark)); }
+      .grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        padding: 0 1em 2em;
+      }
+      .card {
+        display: flex; flex-direction: column; gap: 0.5rem;
+        padding: 1rem; border: 1px solid rgba(0,0,0,.08);
+        border-radius: 12px; background: #fff; box-shadow: var(--box-shadow);
+        text-decoration: none; color: inherit; transition: transform .12s ease, box-shadow .12s ease;
+      }
+      .card:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+      .card h2 { margin: 0; font-size: 1.05rem; }
+      .card p { margin: 0; line-height: 1.45; color: rgb(var(--gray-dark)); }
+      .meta { margin-top: .25rem; font-size: .8rem; color: rgb(var(--gray)); }
+      .title {
+        text-align: center; padding: 1.25em 1em 0.75em;
+      }
+      .title h1 { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="title"><h1>Projects</h1></div>
+      <div class="intro">
+        A selection of public work. Each card links to the repository. Browse the code, file issues,
+        or open a pull request if you spot something interesting.
+      </div>
+      <section class="grid">
+        {projects.map((p) => (
+          <a class="card" href={p.url} target="_blank" rel="noopener">
+            <h2>{p.name}</h2>
+            <p>{p.description}</p>
+            <div class="meta">Last updated: {p.updated}</div>
+          </a>
+        ))}
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

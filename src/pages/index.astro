@@ -3,46 +3,114 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+// Pull a few recent posts
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3) as CollectionEntry<'blog'>[];
+
+// Feature a curated subset of projects (mirrors /projects)
+const featured: Array<{ name: string; description: string; url: string }> = [
+	{
+		name: 'Utopia FoundryVTT',
+		description: 'The Utopia TTRPG system for Foundry VTT.',
+		url: 'https://github.com/VoltaicGRiD/utopia-foundryvtt',
+	},
+	{
+		name: 'Table Safety',
+		description: 'Streamlined TTRPG safety module for Foundry VTT.',
+		url: 'https://github.com/VoltaicGRiD/table-safety',
+	},
+	{
+		name: 'Utopia Things Editor',
+		description: 'Lightweight handout/equipment editor and markup parser.',
+		url: 'https://github.com/VoltaicGRiD/utopia-things-editor',
+	},
+];
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main { width: calc(100% - 2em); max-width: 1100px; margin: 0 auto; }
+			.hero { text-align: center; padding: 1.75rem 1em 1.25rem; }
+			.hero h1 { margin: 0 0 .35rem; font-size: clamp(2rem, 4.5vw, 2.8rem); }
+			.hero p { margin: 0 auto; max-width: 780px; color: rgb(var(--gray-dark)); }
+			.chips { margin-top: .85rem; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+			.chip { padding: .45rem .7rem; border-radius: 999px; border: 1px solid rgba(0,0,0,.08); background: #fff; text-decoration: none; color: inherit; font-size: .95rem; }
+			.chip:hover { border-color: rgba(0,0,0,.18); }
+
+			.section { padding: 0 1em 2rem; }
+			.section h2 { margin: 0 0 .5rem; text-align: center; }
+
+			.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+			.card { background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 12px; padding: 1rem; text-decoration: none; color: inherit; transition: transform .12s ease, box-shadow .12s ease; }
+			.card:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
+			.card h3 { margin: 0 0 .25rem; font-size: 1.05rem; }
+			.card p { margin: 0; color: rgb(var(--gray-dark)); }
+			.meta { margin-top: .3rem; font-size: .85rem; color: rgb(var(--gray)); }
+
+			.cta { margin-top: 1rem; display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+			.btn { display: inline-block; padding: .65em 1.1em; border-radius: 10px; background: #111827; color: #fff; text-decoration: none; }
+			.btn.secondary { background: #fff; color: #111827; border: 1px solid rgba(0,0,0,.1); }
+
+			@media (max-width: 640px) { .hero h1 { font-size: 1.9rem; } }
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero">
+				<h1>Hi, I’m Dustin — I build systems that last</h1>
+				<p>
+					Full‑stack developer and cloud/DevOps engineer focused on shipping reliable web apps, scalable
+					infrastructure, and creative platforms like FoundryVTT. I like performance, ergonomics, and
+					craftsmanship—the kind of work that holds up years from now.
+				</p>
+				<div class="chips">
+					<a class="chip" href="/hire/overview">Hire</a>
+					<a class="chip" href="/projects">Projects</a>
+					<a class="chip" href="/blog">Writing</a>
+					<a class="chip" href="/hire/foundryvtt">FoundryVTT</a>
+					<a class="chip" href="/hire/consulting">Cloud/DevOps</a>
+					<a class="chip" href="/hire/3d-modeling">3D</a>
+				</div>
+				<div class="cta">
+					<a class="btn" href="/hire/overview">Work with me</a>
+					<a class="btn secondary" href="mailto:dustin@dustinconlon.com">Email</a>
+					<a class="btn secondary" href="/resumes/DustinConlon_FullStackSoftwareEngineer.pdf" target="_blank" rel="noopener">Resume</a>
+				</div>
+			</section>
+
+			<section class="section">
+				<h2>Featured projects</h2>
+				<div class="grid">
+					{featured.map((p) => (
+						<a class="card" href={p.url} target="_blank" rel="noopener">
+							<h3>{p.name}</h3>
+							<p>{p.description}</p>
+						</a>
+					))}
+				</div>
+				<div class="cta"><a class="btn secondary" href="/projects">See all projects</a></div>
+			</section>
+
+			<section class="section">
+				<h2>Latest writing</h2>
+				<div class="grid">
+								{posts.map((post) => (
+									<a class="card" href={`/blog/${post.id}/`}>
+							<h3>{post.data.title}</h3>
+							<p class="meta">{new Date(post.data.pubDate).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+							<p>{post.data.description}</p>
+						</a>
+					))}
+				</div>
+				<div class="cta"><a class="btn secondary" href="/blog">Read the blog</a></div>
+			</section>
 		</main>
 		<Footer />
 	</body>

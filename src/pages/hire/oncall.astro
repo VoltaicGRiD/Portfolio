@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/SitePage.astro';
+---
+
+<Layout 
+  title="On-Call / Emergency Support Services" 
+  description="Hire me for on-call support services.">
+  <style>
+    main { width: calc(100% - 2em); max-width: 1200px; margin: 0 auto; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 2em 1em; color: rgb(var(--gray-dark)); text-align: center; }
+    h1 { margin: 0 0 .5em; }
+    p { line-height: 1.6; }
+    .cta { margin-top: 1.25em; display: inline-flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block; padding: .7em 1.1em; border-radius: 10px;
+      background: #111827; color: #fff; text-decoration: none;
+    }
+    .btn.secondary {
+      background: #fff; color: #111827; border: 1px solid rgba(0,0,0,.1);
+    }
+  </style>
+  <div>
+
+    <p>
+    When downtime isn’t an option, I provide emergency support and on-call services for critical systems. Whether it’s after-hours website fixes, urgent cloud incidents, or rapid deployment issues, I step in to resolve problems quickly and reliably. My on-call support ensures your operations continue smoothly, helping you minimize costly downtime and avoid disruptions. This service is ideal for teams who need a trusted senior engineer available when unexpected issues arise.
+    </p>
+
+    <p class="warning">Before committing to any purchase, please contact me at <a href="mailto:dustin@dustinconlon.com">dustin@dustinconlon.com</a> and/or at <a href="tel:+17195516779">+1 (719) 551-6779</a>.</p>
+
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table pricing-table-id="prctbl_1S7a48HbHu1ywpNLSvgVxNxs"
+    publishable-key="pk_live_51QPAK2HbHu1ywpNLSZsRxOY3X6Kpzvm4r2Q2q0LtemBO7bbSD49UmipvC5C7iZCaNpYphdzw8GbQmB4kPmKLdBkt00yK4vUvn2">
+    </stripe-pricing-table>
+  </div>
+</Layout>

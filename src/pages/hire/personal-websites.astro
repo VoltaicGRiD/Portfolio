@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/SitePage.astro';
+---
+
+<Layout 
+  title="Personal Websites" 
+  description="Hire me for personal website design and development.">
+  <style>
+    main { width: calc(100% - 2em); max-width: 1200px; margin: 0 auto; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 2em 1em; color: rgb(var(--gray-dark)); text-align: center; }
+    h1 { margin: 0 0 .5em; }
+    p { line-height: 1.6; }
+    .cta { margin-top: 1.25em; display: inline-flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block; padding: .7em 1.1em; border-radius: 10px;
+      background: #111827; color: #fff; text-decoration: none;
+    }
+    .btn.secondary {
+      background: #fff; color: #111827; border: 1px solid rgba(0,0,0,.1);
+    }
+  </style>
+  <div>
+
+    <p>
+    Showcase who you are with a custom personal website built to highlight your work, skills, or passions. I create clean, responsive sites using modern frameworks like React, Vue, or Next.js that load fast, look great on any device, and reflect your personal style. Whether you need a portfolio to land jobs, a blog to share ideas, or a simple online presence, I design and develop websites that are easy to manage and SEO-friendly. Your site will stand out, rank higher in search results, and leave a lasting impression.
+    </p>
+
+    <p class="warning">Before committing to any purchase, please contact me at <a href="mailto:dustin@dustinconlon.com">dustin@dustinconlon.com</a> and/or at <a href="tel:+17195516779">+1 (719) 551-6779</a>.</p>
+
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table pricing-table-id="prctbl_1S7ZowHbHu1ywpNLIu8UOCBy"
+    publishable-key="pk_live_51QPAK2HbHu1ywpNLSZsRxOY3X6Kpzvm4r2Q2q0LtemBO7bbSD49UmipvC5C7iZCaNpYphdzw8GbQmB4kPmKLdBkt00yK4vUvn2">
+    </stripe-pricing-table>
+  </div>
+</Layout>

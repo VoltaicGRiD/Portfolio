@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/SitePage.astro';
+---
+
+<Layout 
+  title="Other Services" 
+  description="Hire me for your custom projects.">
+  <style>
+    main { width: calc(100% - 2em); max-width: 1200px; margin: 0 auto; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 2em 1em; color: rgb(var(--gray-dark)); text-align: center; }
+    h1 { margin: 0 0 .5em; }
+    p { line-height: 1.6; }
+    .cta { margin-top: 1.25em; display: inline-flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block; padding: .7em 1.1em; border-radius: 10px;
+      background: #111827; color: #fff; text-decoration: none;
+    }
+    .btn.secondary {
+      background: #fff; color: #111827; border: 1px solid rgba(0,0,0,.1);
+    }
+  </style>
+  <div>
+    <p>
+    If you have a project that doesn’t quite fit into the categories listed, don’t hesitate to reach out. I’m open to discussing a wide range of custom projects, from unique web applications to specialized software solutions. My goal is to provide tailored services that meet your specific needs, so let’s explore how I can help bring your vision to life.
+    </p>
+
+    <p>I'm always excited to take on new challenges and collaborate on innovative projects. Let's work together to create something exceptional.</p>
+
+    <p>Feel free to reach out to me via email or phone to discuss your project ideas and how I can help bring them to life.</p>
+
+    <section class="contact" id="contact">
+    <h2 class="section-title">Ready to talk?</h2>
+    <p class="muted">Tell me a bit about your goals—I'll recommend the best path and a clear next step.</p>
+    <div class="box">
+      <a class="btn" href="mailto:dustin@dustinconlon.com">Email: dustin@dustinconlon.com</a>
+      <a class="btn secondary" href="tel:+17195516779">Call: +1 (719) 551‑6779</a>
+      <a class="btn secondary" href="/projects">See projects</a>
+      <a class="btn secondary" href="/resumes/DustinConlon_FullStackSoftwareEngineer.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+    </div>
+  </section>
+  </div>
+</Layout>

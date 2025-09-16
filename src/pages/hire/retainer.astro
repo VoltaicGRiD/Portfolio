@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/SitePage.astro';
+---
+
+<Layout 
+  title="Retainer Services" 
+  description="Hire me for retainer services.">
+  <style>
+    main { width: calc(100% - 2em); max-width: 1200px; margin: 0 auto; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 2em 1em; color: rgb(var(--gray-dark)); text-align: center; }
+    h1 { margin: 0 0 .5em; }
+    p { line-height: 1.6; }
+    .cta { margin-top: 1.25em; display: inline-flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block; padding: .7em 1.1em; border-radius: 10px;
+      background: #111827; color: #fff; text-decoration: none;
+    }
+    .btn.secondary {
+      background: #fff; color: #111827; border: 1px solid rgba(0,0,0,.1);
+    }
+  </style>
+  <div>
+
+    <p>
+    For teams who want consistent, reliable support, I offer retainer services that provide ongoing access to my development and consulting expertise. Instead of hiring full-time staff, you can secure a set number of hours or deliverables each month, ensuring priority response times and predictable costs. Retainers are perfect for businesses that need regular website maintenance, continuous feature development, or proactive cloud/DevOps oversight. By working with me on retainer, you gain a trusted partner who already understands your systems, shortens turnaround time, and helps your projects stay on track.
+    </p>
+
+    <p class="warning">Before committing to any purchase, please contact me at <a href="mailto:dustin@dustinconlon.com">dustin@dustinconlon.com</a> and/or at <a href="tel:+17195516779">+1 (719) 551-6779</a>.</p>
+
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table pricing-table-id="prctbl_1S7jSRHbHu1ywpNLqFyfqDAA"
+    publishable-key="pk_live_51QPAK2HbHu1ywpNLSZsRxOY3X6Kpzvm4r2Q2q0LtemBO7bbSD49UmipvC5C7iZCaNpYphdzw8GbQmB4kPmKLdBkt00yK4vUvn2">
+    </stripe-pricing-table>
+  </div>
+</Layout>

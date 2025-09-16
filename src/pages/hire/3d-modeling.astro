@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/SitePage.astro';
+---
+
+<Layout 
+  title="3D Modeling and Animation Services" 
+  description="Hire me for 3D modeling and animation services.">
+  <style>
+    main { width: calc(100% - 2em); max-width: 1200px; margin: 0 auto; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 2em 1em; color: rgb(var(--gray-dark)); text-align: center; }
+    h1 { margin: 0 0 .5em; }
+    p { line-height: 1.6; }
+    .cta { margin-top: 1.25em; display: inline-flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block; padding: .7em 1.1em; border-radius: 10px;
+      background: #111827; color: #fff; text-decoration: none;
+    }
+    .btn.secondary {
+      background: #fff; color: #111827; border: 1px solid rgba(0,0,0,.1);
+    }
+  </style>
+  <div>
+
+    <p>
+    Bring your ideas into stunning 3D. I create custom 3D models, environments, and animations using Blender, tailored for games, marketing, prototyping, and creative projects. From individual props to fully realized scenes, I deliver assets that are optimized, textured, and ready for use in real-time engines or high-quality renders. Need movement? I also provide smooth, custom 3D animations (excluding rigging) that add life and storytelling to your models. By working with me, you get professional-grade 3D assets that enhance immersion, communicate your vision, and stand out across web, video, and interactive media.
+    </p>
+
+    <p class="info">All of my 3D modeling and animation services come with 5 revisions included, ensuring your complete satisfaction with the final product.</p>
+
+    <p class="warning">Before committing to any purchase, please contact me at <a href="mailto:dustin@dustinconlon.com">dustin@dustinconlon.com</a> and/or at <a href="tel:+17195516779">+1 (719) 551-6779</a>.</p>
+
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table class="pricing-table" pricing-table-id="prctbl_1S7kYdHbHu1ywpNLJRVBllTH"
+    publishable-key="pk_live_51QPAK2HbHu1ywpNLSZsRxOY3X6Kpzvm4r2Q2q0LtemBO7bbSD49UmipvC5C7iZCaNpYphdzw8GbQmB4kPmKLdBkt00yK4vUvn2">
+    </stripe-pricing-table>
+  </div>
+</Layout>

@@ -1,0 +1,32 @@
+---
+title: "Handling Complex Data Systems"
+description: "Strategies for managing and optimizing complex data systems in modern applications."
+pubDate: 2025-02-15
+tags: ["data management", "systems design", "optimization"]
+author: "Dustin Conlon"
+---
+
+*Utopia TTRPG* is rife with complex, interrelated data systems that all need to be handled in a way that is both user-friendly and efficient. For example, both items and spells utilize "features", which are modular components that can be attached to the item or spell to provide utility, damage, bonuses, range effects, and more. Some features are simple, such as a bonus to a skill check, while others are far more complex, and some are even stackable. 
+
+When digitizing the system for FoundryVTT, I had to create a way to manage these features, and allow both players and GMs the flexibility to add, create, modify, and remove features as needed. This meant finding a way to implement them in the relatively strict confines of FoundryVTT, while also ensuring that they were easy to use and understand.
+
+While I'm still not 100% satisfied with the implementation, I believe I've created a system that is both powerful and flexible, and that will allow players and GMs to fully utilize item and spell features in their games.
+
+Here were the biggest challenges I faced when handling complex data systems in *Utopia TTRPG*:
+1. **Automation**: Many features have complex interactions with other features, items, spells, creatures, and the environment. For example, how do you handle a feature that affects all creatures within a certain range, when that range can be modified by other features?
+2. **Data Manipulation**: Many features need to be able to update or modify the attributes of a roll, or a character when used or applied. For example, a feature might add a bonus to a roll, or it might change the damage type of a spell.
+3. **User Experience**: The system needed to be user-friendly, allowing both players and GMs to easily add, modify, and remove features as needed. This meant creating a system that was intuitive and easy to understand, while also being powerful enough to handle the complexity of the game.
+4. **Modular**: The data structure for characters and items needed to be modular, so that future additions to the core game could be easily integrated without requiring a complete overhaul of the existing system.
+5. **Integrated**: The features system needed to be fully integrated with the rest of the game, including items, spells, creatures, and the environment. This meant ensuring that features could interact with other systems in a way that was both logical and consistent.
+
+I still have a long way to go in terms of refining the features system, but I'm proud of what I've accomplished so far. I believe that the system is both powerful and flexible, and that it will allow players and GMs to fully utilize item and spell features in their games.
+
+All this is on hold though, as at the moment, I've been tasked by the game's creator to develop a system completely separate from FoundryVTT. One that will live as its own web and mobile application, and that will allow players to manage their characters, items, spells, and features in a way that is both user-friendly and efficient. This overhaul will give me complete control over the data structure, and break free from the limitations of FoundryVTT. This will be a massive undertaking, but I'm excited to take on the challenge.
+
+*p.s.* FoundryVTT v13 update for *Utopia TTRPG* is still coming! Its just taking a backseat for now while I work on this new system, the <a href="https://myramyth.com" target="_blank" rel="noopener noreferrer">Myramyth</a> website, a new community site for the game, and a few other projects. Stay tuned!
+
+---
+
+“Infinite.” ♾️
+
+<a href="/blog">Back</a>

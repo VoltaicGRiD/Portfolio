@@ -1,12 +1,47 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<'a'> & { matchSegment?: boolean };
 
-const { href, class: className, ...props } = Astro.props;
+const { href, class: className, matchSegment = false, ...props } = Astro.props as Props;
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+
+// Normalize both href and pathname for comparison (remove trailing slashes, ensure leading slash)
+const normalize = (url: string | URL | undefined) => {
+	if (!url) return '/';
+	// Coerce URL objects to string
+	let u = typeof url === 'string' ? url : String(url);
+	// Ensure leading slash
+	if (!u.startsWith('/')) u = '/' + u;
+	// Remove trailing slashes except keep root '/'
+	u = u.replace(/\/+$/, '');
+	return u === '' ? '/' : u;
+};
+
+// Determine if `href` should be considered active for the current pathname.
+// Rules:
+// - Exact match -> active
+// - If href is '/', only active on root '/'
+// - Otherwise, active when pathname equals href OR pathname starts with href + '/'
+//   This makes '/home' active for '/home' and '/home/subpath' but not for '/homepage' or '/homework'
+const nHref = normalize(href as string | URL | undefined);
+const nPath = normalize(pathname || '');
+
+const getFirstSegment = (u: string) => {
+    // u expected like '/hire' or '/hire/sub'
+    const parts = u.split('/').filter(Boolean);
+    return parts.length > 0 ? parts[0] : '';
+};
+
+let isActive = nPath === nHref;
+if (!isActive) {
+    if (matchSegment && nHref !== '/') {
+        isActive = getFirstSegment(nHref) === getFirstSegment(nPath);
+    } else if (nHref !== '/') {
+        isActive = nPath.startsWith(nHref + '/');
+    }
+}
+
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
