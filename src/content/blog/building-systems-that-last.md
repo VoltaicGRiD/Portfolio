@@ -3,6 +3,7 @@ title: "Building Systems That Last"
 description: "How my work in cloud engineering and full-stack development shaped the way I approach technology."
 pubDate: 2025-07-30
 tags: ["Development", "Cloud", "DevOps", "Engineering"]
+heroImage: "../../assets/building-systems-that-last.png"
 ---
 
 When I first started out, I thought development was just about writing code. Over the years, I’ve learned it’s just as much about building systems that can stand on their own. The best code isn’t just functional, it’s maintainable, resilient, and designed with the people who will use it in mind.  

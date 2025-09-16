@@ -3,6 +3,7 @@ title: "What Video Games Teach Me About Building Worlds"
 description: "Some of the games that shaped the way I think about design and storytelling."
 pubDate: 2025-08-17
 tags: ["Video Games", "Game Design", "Creativity", "TTRPG"]
+heroImage: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.mobygames.com%2Fimages%2Fcovers%2Fl%2F602287-death-stranding-playstation-4-front-cover.jpg&f=1&nofb=1&ipt=49067edd0a358cdeaeaa65eb311b93c13e27171e092a511eceeb12b28b39cbf6"
 ---
 
 I’ve been playing games for as long as I can remember, and over time they’ve shaped the way I think about design and storytelling. Not in a textbook way, but in those little moments where something clicks and I carry it with me into other projects.  
