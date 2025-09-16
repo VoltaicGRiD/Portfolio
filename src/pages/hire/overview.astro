@@ -11,16 +11,16 @@ import Layout from '../../layouts/SitePage.astro';
     :global(.prose) { max-width: 960px; }
 
     /* hero */
-    .hero { text-align: center; padding: 1.25rem 0 .75rem; }
+    .hero { text-align: center; padding: 0 }
     .hero h1 { font-size: clamp(2rem, 4vw, 2.5rem); margin: 0 0 .25rem; }
     .hero h2 { margin: 0.25rem 0 0; font-size: 1.125rem; }
     .pills { margin-top: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
     .pill { padding: .45rem .7rem; border-radius: 999px; border: 1px solid rgba(0,0,0,.08); background: #fff; text-decoration: none; color: inherit; font-size: .95rem; }
     .pill:hover { border-color: rgba(0,0,0,.18); box-shadow: 0 1px 0 rgba(0,0,0,.04); }
 
-    .section-title { margin: 1.5rem 0 .5rem; font-size: 1.25rem; text-align: center; }
+    .section-title { margin: 1.5rem 0 .5rem; font-size: 2.25rem; text-align: center; }
     .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-    .cat { background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 12px; padding: 1rem; }
+    .cat { display: flex; flex-direction: column; justify-content: space-between; background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 12px; padding: 1rem; }
     .cat h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
     .cat p { margin: 0 0 .5rem; color: rgb(var(--gray)); }
     .cat ul { margin: 0 0 .75rem 1rem; padding: 0; }
@@ -36,8 +36,8 @@ import Layout from '../../layouts/SitePage.astro';
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .75rem; margin-top: .5rem; }
     .step { background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 10px; padding: .9rem .85rem; text-align: left; }
     .badge { display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; border-radius: 999px; background: #111827; color: #fff; font-weight: 600; margin-right: .5rem; font-size: .9rem; }
-    .step h4 { margin: 0 0 .25rem; font-size: 1rem; display: flex; align-items: center; }
-    .muted { color: rgb(var(--gray)); font-size: .95rem; }
+    .step h4 { margin: 0 0 .25rem; font-size: 1.2rem; display: flex; align-items: center; }
+    .muted { color: rgb(var(--gray)); font-size: 1.1rem; }
 
     .contact { margin-top: 1.75rem; text-align: center; }
     .contact .box { margin-top: .75rem; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
@@ -119,8 +119,6 @@ import Layout from '../../layouts/SitePage.astro';
     <div class="box">
       <a class="btn" href="mailto:dustin@dustinconlon.com">Email: dustin@dustinconlon.com</a>
       <a class="btn secondary" href="tel:+17195516779">Call: +1 (719) 551‑6779</a>
-      <a class="btn secondary" href="/projects">See projects</a>
-      <a class="btn secondary" href="/resumes/DustinConlon_FullStackSoftwareEngineer.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
     </div>
   </section>
 </Layout>
