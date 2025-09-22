@@ -1,58 +1,160 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import ESAFeed from '../components/ESAFeed.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Learn more about Dustin Conlon, a Full Stack Software Engineer."
-	pubDate={new Date()}
->
-	<p>
-	<section>
-		<p>
-			Hi — I'm Dustin Conlon, a Full Stack Software Engineer who builds accessible, maintainable, and
-			performant web applications. I enjoy working across the stack and shipping features end-to-end,
-			from design and frontend implementation to backend APIs and deployment.
-		</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`About – ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <style>
+      :root {
+        --card-bg: rgba(32, 32, 32, 0.6);
+        --card-border: rgba(255, 255, 255, 0.08);
+        --chip-bg: rgba(255, 255, 255, 0.08);
+        --chip-border: rgba(255, 255, 255, 0.15);
+        --muted: rgb(var(--gray));
+        --text: rgb(var(--black));
+        --accent: #9aa9ff;
+      }
 
-		<p>
-			My work emphasizes pragmatic engineering: I prioritize clear, testable code, fast user
-			experiences, and developer ergonomics. I have experience with modern JavaScript and
-			TypeScript-based toolchains and frameworks (including Astro, React, and Node.js), CSS and
-			a11y best practices, and common cloud and CI/CD workflows.
-		</p>
+      main {
+        width: min(1100px, calc(100% - 2rem));
+        margin: 1.25rem auto 2.5rem;
+        padding: 2rem 0 2.25rem;
+        background: rgba(81, 81, 81, 0.75);
+				border-radius: 16px;
+				box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+				backdrop-filter: blur(5px);
+				-webkit-backdrop-filter: blur(5px);
+				border: 1px solid rgba(81, 81, 81, 0.3);
+      }
 
-		<h3>Technical highlights</h3>
-		<ul>
-			<li>Languages: JavaScript, TypeScript, HTML, CSS</li>
-			<li>Frameworks & tooling: Astro, React, Node.js</li>
-			<li>Testing & quality: unit and integration testing, linting, accessibility checks</li>
-			<li>Infrastructure: Git-based workflows, CI/CD pipelines, deployment to cloud/static hosts</li>
-		</ul>
+      .wrap { width: min(920px, calc(100% - 2rem)); margin: 0 auto; }
 
-		<h3>Experience highlights</h3>
-		<ul>
-			<li>Built and shipped production web applications and content-driven sites.</li>
-			<li>Improved performance and accessibility for user-facing interfaces.</li>
-			<li>Collaborated with designers, product managers, and engineers to deliver features on time.</li>
-		</ul>
+      .hero { text-align: center; padding: 1.25rem 0 0.25rem; }
+      .hero h1 { margin: 0 0 .6rem; font-size: clamp(2rem, 4.5vw, 2.6rem); color: var(--text); }
+      .lead { margin: 0 auto; max-width: 70ch; color: var(--muted); line-height: 1.65; }
 
-		<h3>Backend & systems</h3>
-		<p>
-			On the backend I have experience building APIs and services using .NET (C#) and Python. My
-			backend work includes designing and implementing RESTful APIs, working with relational and
-			non-relational databases, and creating background processing and integration jobs. I'm familiar
-			with dependency injection patterns, ORM tools, and writing reliable unit and integration tests
-			for server-side code.
-		</p>
+      .chips { margin: 1rem auto 0; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+      .chip { padding: .45rem .7rem; border-radius: 999px; border: 1px solid var(--chip-border); background: var(--chip-bg); color: var(--text); font-size: .95rem; white-space: nowrap; }
 
-		<ul>
-			<li>.NET / C#: Web API development, dependency injection, Entity Framework, and deployment to
-				cloud hosts.</li>
-			<li>Python: scripting, data processing, and building lightweight services and integrations.</li>
-			<li>APIs & data: REST design, JSON/HTTP contracts, schema validation, and working with SQL and
-				NoSQL databases.</li>
-			<li>Operational: CI/CD pipelines, monitoring, and container-based deployments.</li>
-		</ul>
-	</section>
-</Layout>
+      .grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 1rem; margin-top: 1.5rem; }
+      .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1rem; }
+      .card h3 { margin: 0 0 .35rem; font-size: 1.12rem; color: var(--text); }
+      .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+      .card ul { margin: .25rem 0 0; padding-left: 1.05rem; color: var(--muted); }
+      .card li { margin: .3rem 0; }
+
+      .badges { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .35rem; }
+      .badge { border: 1px solid var(--chip-border); background: rgba(255,255,255,.06); color: var(--text); padding: .35rem .55rem; border-radius: .6rem; font-size: .9rem; }
+
+      .section { margin-top: 1.25rem; }
+      .section h2 { text-align: center; margin: 0 0 .5rem; font-size: 1.6rem; color: var(--text); }
+
+      .timeline { display: grid; gap: .75rem; margin-top: .5rem; }
+      .event { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: .85rem 1rem; }
+      .event .when { color: var(--muted); font-size: .9rem; }
+      .event .title { color: var(--text); font-weight: 600; margin-top: .15rem; }
+      .event .desc { color: var(--muted); margin-top: .25rem; }
+
+      .cta { margin-top: 1.25rem; text-align: center; }
+      .btn { display: inline-block; padding: .7rem 1.1rem; border-radius: 10px; background: #111827; color: #fff; text-decoration: none; border: 1px solid rgba(255,255,255,.12); }
+      .btn.secondary { background: #ffffff; color: #111827; }
+
+      @media (max-width: 860px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 640px) {
+        .hero h1 { font-size: 1.9rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <ESAFeed />
+    <Header />
+    <main>
+      <div class="wrap">
+        <section class="hero">
+          <h1>About Me</h1>
+          <p class="lead">
+            I’m Dustin Conlon, a full‑stack engineer focused on reliable web apps, scalable infrastructure,
+            and developer experience. I care about performance, accessibility, and craftsmanship—the kind of work
+            that holds up years from now.
+          </p>
+          <div class="chips">
+            <span class="chip">Astro • React • Node</span>
+            <span class="chip">.NET / C#</span>
+            <span class="chip">CI/CD & Cloud</span>
+            <span class="chip">A11y & performance</span>
+          </div>
+        </section>
+
+        <section class="grid">
+          <article class="card">
+            <h3>What I value</h3>
+            <p>
+              Pragmatic engineering. Clear, testable code. Fast UX. Ergonomic tooling.
+              I ship features end‑to‑end—design, frontend, APIs, and deployment.
+            </p>
+            <ul>
+              <li>Maintainable systems and clean boundaries</li>
+              <li>Strong a11y and responsive design</li>
+              <li>Observability, CI, and continuous delivery</li>
+            </ul>
+          </article>
+
+          <aside class="card">
+            <h3>Toolbox</h3>
+            <div class="badges">
+              <span class="badge">JavaScript</span>
+              <span class="badge">TypeScript</span>
+              <span class="badge">Astro</span>
+              <span class="badge">React</span>
+              <span class="badge">Node.js</span>
+              <span class="badge">CSS</span>
+              <span class="badge">.NET / C#</span>
+              <span class="badge">Python</span>
+              <span class="badge">REST</span>
+							<span class="badge">GraphQL</span>
+							<span class="badge">Azure / AWS</span>
+							<span class="badge">Docker</span>
+							<span class="badge">Kubernetes</span>
+              <span class="badge">SQL/NoSQL</span>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section">
+          <h2>Experience highlights</h2>
+          <div class="timeline">
+            <div class="event">
+              <div class="when">Recent</div>
+              <div class="title">Built and shipped production web apps and content sites</div>
+              <div class="desc">End‑to‑end features, performance tuning, and accessibility improvements.</div>
+            </div>
+            <div class="event">
+              <div class="when">Ongoing</div>
+              <div class="title">Backend & systems work (.NET, Python)</div>
+              <div class="desc">APIs, background jobs, data modeling, and integration workflows.</div>
+            </div>
+            <div class="event">
+              <div class="when">Always</div>
+              <div class="title">DevEx, CI/CD, and observability</div>
+              <div class="desc">Pipelines, testing, linting, and reliable deployments.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta">
+          <a class="btn" href="/hire/overview">Work with me</a>
+          <a class="btn secondary" href="mailto:dustin@dustinconlon.com">Email</a>
+        </section>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

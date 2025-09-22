@@ -20,4 +20,3 @@ Maybe that’s why Star Trek has always stuck with me. It shows that imagination
 
 *Engage.* 🚀
 
-<a href="/blog">Back</a>

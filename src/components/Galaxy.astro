@@ -1,0 +1,152 @@
+---
+const {
+  mode = 'background',   // 'background' | 'section'
+  height = '100vh',      // used when mode === 'section'
+  // reduced defaults for better performance site-wide
+  density = 0.0007,      // stars per pixel^2 (scaled by area)
+  maxStars = 800,        // cap to avoid runaway on very large screens
+  twinkle = true,        // animate alpha pulsing
+} = Astro.props;
+
+const id = `galaxy-${Math.random().toString(36).slice(2)}`;
+
+const containerStyle =
+  mode === 'background'
+    ? `position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;`
+    : `position:relative;width:100%;height:${height};pointer-events:none;`;
+---
+
+<div id={id} class="galaxy" style={containerStyle} data-density={density} data-max-stars={maxStars} data-twinkle={twinkle ? '1' : '0'}>
+  <canvas style="display:block;width:100%;height:100%;"></canvas>
+</div>
+
+<script is:inline>
+  (function() {
+    const root = (document.currentScript && document.currentScript.previousElementSibling);
+    if (!root) return;
+    const canvas = root.querySelector('canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const ds = root.dataset || {};
+    const config = {
+      density: Number(ds.density || 0.0012),
+      maxStars: Number(ds.maxStars || 1200),
+      twinkle: ds.twinkle === '1' || ds.twinkle === 'true',
+    };
+
+  let stars = [];
+  let dpr = Math.max(1, window.devicePixelRatio || 1);
+  let running = true;
+  let frameId = 0;
+  let sprite = null;
+  let lastTs = 0;
+  const minFrameMs = 1000 / 30; // cap to ~30 FPS
+
+  // respect reduced motion preference
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function createSprite() {
+      // Pre-render a soft round star sprite for fast drawImage scaling
+      const s = document.createElement('canvas');
+      const S = 32; // base sprite size (will be scaled per star)
+      s.width = S * dpr;
+      s.height = S * dpr;
+      const c = s.getContext('2d');
+      if (!c) return s;
+      c.scale(dpr, dpr);
+      const grad = c.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
+      grad.addColorStop(0, 'rgba(255,255,255,1)');
+      grad.addColorStop(0.3, 'rgba(255,255,255,0.7)');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      c.fillStyle = grad;
+      c.beginPath();
+      c.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2);
+      c.fill();
+      return s;
+    }
+
+    function resize() {
+      const w = Math.max(1, root.clientWidth);
+      const h = Math.max(1, root.clientHeight);
+      dpr = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+
+      sprite = createSprite();
+
+      const target = Math.min(config.maxStars, Math.floor(w * h * config.density));
+      stars = new Array(target).fill(0).map(() => {
+        const x = Math.random() * w;
+        const y = Math.random() * h;
+        const r = Math.random();
+        const size = r < 0.92 ? (0.3 + Math.random() * 0.6) : (0.6 + Math.random() * 1.0);
+        const baseAlpha = 0.5 + Math.random() * 0.5;
+        const speed = 0.5 + Math.random() * 1.5;
+        const phase = Math.random() * Math.PI * 2;
+        const canTwinkle = config.twinkle && Math.random() < 0.35;
+        return { x, y, size, baseAlpha, speed, phase, twinkle: canTwinkle };
+      });
+    }
+
+    function draw(t) {
+      if (!running) return;
+      // throttle to minFrameMs
+      if (t - lastTs < minFrameMs) {
+        frameId = requestAnimationFrame(draw);
+        return;
+      }
+      lastTs = t;
+      const ts = t / 1000;
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      if (!sprite) sprite = createSprite();
+      const S = 32;
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        let alpha = s.baseAlpha;
+        if (s.twinkle && !prefersReduced) {
+          alpha = 0.5 + 0.5 * Math.abs(Math.sin(s.phase + ts * s.speed));
+        }
+        ctx.globalAlpha = alpha;
+        const sizePx = s.size;
+        const d = sizePx * (S / 2);
+        ctx.drawImage(sprite, s.x - d, s.y - d, d * 2, d * 2);
+      }
+      ctx.globalAlpha = 1;
+      frameId = requestAnimationFrame(draw);
+    }
+
+    const ro = new ResizeObserver(resize);
+    ro.observe(root);
+    resize();
+
+    // Pause rendering when page is hidden to save CPU
+    function handleVisibility() {
+      if (document.hidden) {
+        running = false;
+        if (frameId) cancelAnimationFrame(frameId);
+      } else {
+        if (!running) {
+          running = true;
+          frameId = requestAnimationFrame(draw);
+        }
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibility, { passive: true });
+
+    frameId = requestAnimationFrame(draw);
+
+    // Cleanup when page changes (Astro/SPA) or before hot-reload
+    addEventListener('astro:before-preload', () => {
+      running = false;
+      if (frameId) cancelAnimationFrame(frameId);
+      ro.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibility);
+    }, { once: true });
+  })();
+</script>

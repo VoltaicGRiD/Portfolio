@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+  title="Contact"
+  description="Get in touch with Dustin Conlon for software development inquiries."
+  pubDate={new Date()}
+>
+  <style>
+    .contact { margin-top: 1.75rem; text-align: center; }
+    .contact .box { margin-top: .75rem; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+  </style>
+
+  <p>If you have any questions or inquiries, feel free to reach out!</p>
+  <p>While I don't have a form set up, you can reach me via email at <a href="mailto:dustin@dustinconlon.com">dustin@dustinconlon.com</a>.</p>
+  <p>You can also call me at <a href="tel:+17196950468">+1 (719) 695-0468</a>.</p>
+  <p>Looking forward to hearing from you!</p>
+
+  <section class="contact" id="contact">
+    <h2 class="section-title">Ready to talk?</h2>
+    <p class="muted">Tell me a bit about your goals—I'll recommend the best path and a clear next step.</p>
+    <div class="box">
+      <a class="btn" href="mailto:dustin@dustinconlon.com">Email: dustin@dustinconlon.com</a>
+      <a class="btn secondary" href="tel:+17196950468">Call: +1 (719) 695-0468</a>
+    </div>
+  </section>
+</Layout>

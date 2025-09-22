@@ -1,0 +1,90 @@
+---
+const rssFeedUrl = "https://feeds.feedburner.com/esawebb/images/";
+
+interface ImageEntry {
+    imgSrc: string;
+    timestamp: number;
+}
+
+// Simple in-memory cache stored at module level so it survives across
+// requests while the server process is running. This avoids hitting the
+// remote RSS feed on every SSR render.
+const __esa_cache: { timestamp: number; images: ImageEntry[] } = (globalThis as any).__esa_cache ||= { timestamp: 0, images: [] };
+
+// Acceptable defaults, overridable via component props
+const { count = 1, timeoutMs = 5000, cacheTtlMs = 1000 * 60 * 5 } = Astro.props as { count?: number; timeoutMs?: number; cacheTtlMs?: number };
+
+async function fetchAndParseRSS(maxCount = 1, timeout = 5000): Promise<ImageEntry[]> {
+    const imgs: ImageEntry[] = [];
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(rssFeedUrl, { signal: controller.signal });
+        clearTimeout(timer);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const text = await response.text();
+
+        // Find each <item>...</item> block and stop early once we have enough
+        const itemRegex = /<item[\s\S]*?<\/item>/gi;
+        let match: RegExpExecArray | null;
+        while ((match = itemRegex.exec(text)) !== null) {
+            const itemStr = match[0];
+
+            // Extract pubDate content
+            const pubMatch = itemStr.match(/<pubDate[^>]*>([\s\S]*?)<\/pubDate>/i);
+            const pubDateStr = pubMatch ? pubMatch[1].trim() : '';
+            const timestamp = pubDateStr ? Date.parse(pubDateStr) : 0;
+
+            // Extract URL attribute (covers enclosure, media:content, and other url= attributes)
+            // Use a single robust pattern to capture the quoted URL and a fallback to inline <img src=> inside content.
+            const urlMatch = itemStr.match(/url=(['"])(.*?)\1/i) || itemStr.match(/<img[^>]*src=(['"])(.*?)\1/i);
+            const imgSrc = urlMatch ? urlMatch[2] : '';
+
+            if (imgSrc) {
+                imgs.push({ imgSrc, timestamp });
+                if (imgs.length >= maxCount) break; // stop early
+            }
+        }
+
+        return imgs;
+    } catch (error) {
+        // Don't spam logs in production; keep a single informative message.
+        console.error("ESAFeed: error fetching/parsing RSS:", (error as Error).message ?? error);
+        return imgs;
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
+function filterLatestImages(images: ImageEntry[], cnt = 1): ImageEntry[] {
+    return [...images].sort((a, b) => b.timestamp - a.timestamp).slice(0, cnt);
+}
+
+let latestImages: ImageEntry[] = [];
+
+// Use cache if fresh
+if (Date.now() - __esa_cache.timestamp < cacheTtlMs && Array.isArray(__esa_cache.images) && __esa_cache.images.length > 0) {
+    latestImages = filterLatestImages(__esa_cache.images, count);
+} else {
+    const fetched = await fetchAndParseRSS(count, timeoutMs);
+    if (fetched.length > 0) {
+        // update cache with what we found (store more than requested so future requests can be served)
+        __esa_cache.timestamp = Date.now();
+        __esa_cache.images = fetched;
+        latestImages = filterLatestImages(fetched, count);
+    } else {
+        // on error/fetch-miss, fall back to whatever's in cache even if stale
+        latestImages = filterLatestImages(__esa_cache.images || [], count);
+    }
+}
+---
+
+{latestImages.length > 0 ? (
+  <div class="esa-feed">
+    <img src={latestImages[0]?.imgSrc} alt="Latest ESA Webb Image" />
+  </div>
+) : (
+    <p>No images found.</p>
+)}

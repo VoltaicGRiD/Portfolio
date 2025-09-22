@@ -12,6 +12,9 @@ With *Metal Gear Solid*, it wasn’t just the stealth that stuck with me. It was
 
 *Death Stranding* hit me completely differently. I didn’t expect walking with a package on my back to feel so meaningful, but it did. The pacing, the strange beauty of the world, and the quiet sense of connection with other players showed me how much weight atmosphere and intention can carry, even in simple systems.  
 
+![Screenshot from the game FTL: Faster Than Light](https://images.steamusercontent.com/ugc/921431418966269512/662794F23D2099E076DA5780552B3D4AC467455A/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
+<sub><i>Screenshot from the game FTL: Faster Than Light</i></sub>
+
 Games like *Super Metroid* and *Elden Ring* pulled me in through exploration. I love that feeling of not being told everything, of piecing things together, of realizing the map is bigger than you thought. That sense of discovery is something I try to bring into my own projects. I like the idea of not giving everything away at once, but letting people uncover things over time.  
 
 On the fast-paced side, games like *Apex Legends* and *Battlefield* taught me how much feedback matters. In the middle of a firefight it’s the small signals, like a hit marker or a teammate ping, that keep the chaos manageable. That same lesson shows up in coding and design for me. Clear feedback makes everything smoother, whether it’s for a player or a user.  
@@ -23,5 +26,3 @@ I guess that’s what keeps me so hooked on games. They’ve been teachers in th
 ---
 
 *Press Start.* 🎮
-
-<a href="/blog">Back</a>

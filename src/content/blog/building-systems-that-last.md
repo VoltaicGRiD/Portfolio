@@ -22,4 +22,3 @@ That’s the approach I try to bring to every piece of work I do: make it fast, 
 
 *All green checks.* ✅
 
-<a href="/blog">Back</a>

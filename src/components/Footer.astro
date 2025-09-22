@@ -4,6 +4,28 @@ const today = new Date();
 
 <footer>
 	&copy; {today.getFullYear()} Dustin Conlon. All rights reserved.
+	<br/>
+	<sub><i>Background image courtesy of the European Space Agency</i></sub>
+	<div class="link-grid">
+		<div class="column">
+			<a href="/hire/overview">Hire me</a>
+			<a href="/projects">Projects</a>
+			<a href="/blog">Blog</a>
+			<a href="/about">About</a>
+		</div>
+		<div class="column">
+			<a href="/hire/foundryvtt">FoundryVTT</a>
+			<a href="/hire/3d-modeling">3D Modeling</a>
+			<a href="/hire/websites">Websites</a>
+			<a href="/hire/consulting">Consulting</a>
+		</div>
+		<div class="column">
+			<a href="/hire/retainer">Retainer</a>
+			<a href="/hire/oncall">On-Call Support</a>
+			<a href="/hire/other">Other Services</a>
+			<a href="/contact">Contact</a>
+		</div>
+	</div>
 	<div class="social-links">
 		<a href="https://mastodon.social/@VoltaicGRiD" target="_blank">
 			<span class="sr-only">Follow VoltaicGRiD on Mastodon</span>
@@ -33,9 +55,33 @@ const today = new Date();
 <style>
 	footer {
 		padding: 2em 1em 1em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		background-color: transparent;
+		color: #fff;
 		text-align: center;
+
+		/* From https://css.glass */
+		background: rgba(81, 81, 81, 0.75);
+		border-radius: 16px;
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+		backdrop-filter: blur(5px);
+		-webkit-backdrop-filter: blur(5px);
+		border: 1px solid rgba(81, 81, 81, 0.3);
+	}
+	.link-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+		gap: 1em;
+		max-width: 600px;
+		margin: 1em auto 0 auto;
+	}
+	.link-grid .column {
+		display: flex;
+		flex-direction: column;
+		gap: 0.1em;
+	}
+	.link-grid a {
+		text-decoration: none;
+		color: #fff;
 	}
 	.social-links {
 		display: flex;
@@ -45,7 +91,7 @@ const today = new Date();
 	}
 	.social-links a {
 		text-decoration: none;
-		color: rgb(var(--gray));
+		color: #fff;
 	}
 	.social-links a:hover {
 		color: rgb(var(--gray-dark));
